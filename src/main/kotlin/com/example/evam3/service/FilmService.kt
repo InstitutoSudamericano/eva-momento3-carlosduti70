@@ -27,4 +27,15 @@ class FilmService {
         }
 
     }
+
+    fun update(film: Film): Film{
+        try {
+            filmRepository.findBy(film.id!!)
+                ?: throw Exception("ID no existe")
+            return filmRepository.save(film)
+        }
+        catch (ex:Exception){
+            throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
+        }
+    }
 }

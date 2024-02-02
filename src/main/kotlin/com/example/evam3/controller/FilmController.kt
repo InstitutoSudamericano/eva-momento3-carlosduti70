@@ -23,4 +23,9 @@ class FilmController {
         return ResponseEntity<Film>(filmService.save(film), HttpStatus.CREATED)
     }
 
+    @PutMapping
+    fun update (@RequestBody film: Film):ResponseEntity<Film>{
+        return ResponseEntity(filmService.update(film), HttpStatus.OK)
+    }
+
 }

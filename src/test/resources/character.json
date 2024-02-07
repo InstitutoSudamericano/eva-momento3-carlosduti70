@@ -1,0 +1,7 @@
+{
+  "name":"Han Solo",
+  "description": "Contrabandista",
+  "cost": 100,
+  "side":"luminoso",
+  "sceneId":1
+}

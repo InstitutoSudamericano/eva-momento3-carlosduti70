@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@CrossOrigin(methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.DELETE])
 @RequestMapping("/film")
 class FilmController {
     @Autowired
@@ -26,6 +27,11 @@ class FilmController {
     @PutMapping
     fun update (@RequestBody film: Film):ResponseEntity<Film>{
         return ResponseEntity(filmService.update(film), HttpStatus.OK)
+    }
+
+    @DeleteMapping("/delete/{id}")
+    fun delete (@PathVariable("id") id: Long):Boolean?{
+        return filmService.     delete(id)
     }
 
 }

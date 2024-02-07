@@ -19,20 +19,38 @@ class FilmService {
     fun save (film:Film): Film{
         try{
             film.title?.takeIf { it.trim().isNotEmpty() }
-                ?: throw Exception("Film no debe ser vacio")
+                ?: throw Exception("Titulo no debe ser vacio")
+            film.director?.takeIf { it.trim().isNotEmpty() }
+                ?: throw Exception("Director no debe ser vacio")
+            film.duration?.takeIf { it > 0.00 }
+                ?: throw Exception("Duracion no debe ser 0")
+            film.releaseYear?.takeIf { it != null   }
+                ?: throw Exception("fecha de lanzamiento no debe ser vacio")
             return filmRepository.save(film)
         }
         catch (ex: Exception){
             throw ResponseStatusException(HttpStatus.BAD_REQUEST,ex.message)
         }
-
     }
 
     fun update(film: Film): Film{
         try {
-            filmRepository.findBy(film.id!!)
+            filmRepository.findById(film.id)
                 ?: throw Exception("ID no existe")
+
             return filmRepository.save(film)
+        }
+        catch (ex:Exception){
+            throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
+        }
+    }
+
+    fun delete (id: Long?):Boolean?{
+        try{
+            val response = filmRepository.findById(id)
+                ?: throw Exception("ID no existe")
+            filmRepository.deleteById(id!!)
+            return true
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)

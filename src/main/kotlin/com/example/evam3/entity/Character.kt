@@ -9,6 +9,7 @@ class Character {
     @Id
     @Column(updatable = false)
     var id: Long? = null
+    var name: String? = null
     var description: String?= null
     var cost: Double?= null
     var side: String?= null

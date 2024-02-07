@@ -9,6 +9,7 @@ class Scene {
     @Id
     @Column(updatable = false)
     var id: Long? = null
+    var title: String?= null
     var description: String?= null
     var budget: Double?= null
     var minutes: Long? = null

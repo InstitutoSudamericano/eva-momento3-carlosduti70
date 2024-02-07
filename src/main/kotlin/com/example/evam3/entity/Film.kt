@@ -12,4 +12,6 @@ class Film {
     var title: String? = null
     var director: String? = null
     var duration: Long? = null
+    @Column(name="release_year")
+    var releaseYear: Long? = null
 }
